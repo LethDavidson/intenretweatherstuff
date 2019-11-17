@@ -66,4 +66,13 @@ public class WeatherManager : MonoBehaviour, IGameManager {
         status = ManagerStatus.Started;
     }
 
+//trigger calls this to log the weather, passes the name of what trigger volume is callign it. 
+    public void LogWeather(string name){
+        StartCoroutine(_network.LogWeather(name, cloudValue, OnLogged));
+    }
+
+    public void OnLogged(string response){
+        Debug.Log(response);
+    }
+
 }

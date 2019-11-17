@@ -4,18 +4,23 @@ using UnityEngine;
 
 [RequireComponent (typeof (WeatherManager))]
 [RequireComponent (typeof(ImagesManager))]
+[RequireComponent (typeof(AudioManager))]
 public class Managers : MonoBehaviour {
 	public static WeatherManager Weather { get; private set; }
 	public static ImagesManager Images {get; private set;}
+	public static AudioManager Audio {get; private set;}
 
 	private List<IGameManager> _startSequence;
 
 	void Awake () {
 		Weather = GetComponent<WeatherManager> ();
+		Images = GetComponent<ImagesManager> (); // forgot to add this, bork emy shit :p
+		Audio = GetComponent<AudioManager> ();
 
 		_startSequence = new List<IGameManager> ();
 		_startSequence.Add (Weather);
 		_startSequence.Add (Images);
+		_startSequence.Add (Audio);
 
 		StartCoroutine (StartupManagers ());
 	}
@@ -27,7 +32,7 @@ public class Managers : MonoBehaviour {
 		foreach (IGameManager manager in _startSequence) {
 			manager.Startup(network);
 		}
-
+ 
 		yield return null;
 
 		int numModules = _startSequence.Count;
