@@ -21,11 +21,13 @@ public class UIController : MonoBehaviour
             if (isShowing){
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+                Debug.Log("Locked cursor");
             }
             else
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+                Debug.Log("Unlocked curosr");
             }
         }
 
